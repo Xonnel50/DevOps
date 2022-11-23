@@ -9,7 +9,10 @@ pipeline {
         stage('Docker-Verify') {
             steps {
                 retry(3) {
-                sh 'doker --version'
+                sh 'docker --version'
+                }
+                timeout(time: 10, unit: 'SECONDS') {
+                    sh 'sleep 30'
                 }
             }
         }
