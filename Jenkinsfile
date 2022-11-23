@@ -20,7 +20,7 @@ pipeline {
         
         stage('Docker-Build') {
             steps {
-                sh 'docker build -t ${Docker_Image_Name}:${Docker_Tag} .'
+                sh 'docker build -t ${Docker_Image_Name}:${env.BUILD_NUMBER} .'
             }
         } 
         stage('Docker-Image-Verify') {
