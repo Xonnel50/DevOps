@@ -18,6 +18,11 @@ pipeline {
             steps {
                 sh 'docker build -t myimage:v1 .'
             }
-        }    
+        } 
+        stage('Docker-Image-Verify') {
+            steps {
+                sh 'docker images'
+            }
+        } 
     }
 }
