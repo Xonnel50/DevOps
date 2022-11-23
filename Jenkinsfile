@@ -5,8 +5,11 @@ pipeline {
         Docker_Tag = 'v2'
     }
     
-    options { timestamps() }
-    skipDefaultCheckout()
+    options { 
+    timestamps() 
+    skipDefaultCheckout()                 
+            }
+  
     stages {
         stage('Pre-Checks') {
         parallel {
