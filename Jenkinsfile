@@ -69,4 +69,9 @@ pipeline {
             }
         } 
     }
+    post {
+        always {
+            sh 'docker images'        
+        }
+    }
 }
