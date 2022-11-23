@@ -63,11 +63,7 @@ pipeline {
                 sh "docker ps"
             }
         } 
-        stage('Docker-Images-CleanUp') {
-            steps {
-                sh 'docker image prune -af' 
-            }
-        } 
+        
     }
     post {
         always {
@@ -81,6 +77,9 @@ pipeline {
         }
         success {
             sh 'curl localhost'         
+        }
+        cleanup {
+            sh 'docker image prune -af'   
         }
     }
 }
