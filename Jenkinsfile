@@ -7,7 +7,8 @@ pipeline {
     
     options { 
     timestamps() 
-    buildDiscarder(logRotator(numToKeepStr: '1'))                 
+    buildDiscarder(logRotator(numToKeepStr: '10'))
+    disableConcurrentBuilds()
             }
   
     stages {
@@ -17,6 +18,7 @@ pipeline {
             steps {
                 retry(3) {
                 sh 'docker --version'
+                sh 'sleep 30'
                 }
             }
         }
