@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+        Docker_Image_Name = 'myimage'
+        Docker_Tag = 'v2'
+    }
 
     stages {
         stage('Docker-Verify') {
@@ -16,7 +20,7 @@ pipeline {
         
         stage('Docker-Build') {
             steps {
-                sh 'docker build -t myimage:v1 .'
+                sh 'docker build -t ${Docker_Image_Name}:${Docker_Tag} .'
             }
         } 
         stage('Docker-Image-Verify') {
