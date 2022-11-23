@@ -54,6 +54,10 @@ pipeline {
         } 
         
         stage('Docker-Deploy') {
+            input
+            {
+                message "Do you want to proceed for deployment ?"
+            }
             steps {
                 sh "docker run -itd  -p 80:80 ${Docker_Image_Name}:${env.BUILD_NUMBER}"
                 sh "docker ps"
