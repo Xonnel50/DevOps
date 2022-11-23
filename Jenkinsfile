@@ -6,7 +6,7 @@ pipeline {
     }
     
     options { timestamps() }
-    
+    skipDefaultCheckout()
     stages {
         stage('Pre-Checks') {
         parallel {
@@ -29,6 +29,7 @@ pipeline {
         stage('Docker-Build') {
             steps {
                 sh "docker build -t ${Docker_Image_Name}:${env.BUILD_NUMBER} ."
+                sh "docker inspect ${Docker_Image_Name}:${env.BUILD_NUMBER}"
             }
         } 
         stage('Docker-Image-Verify') {
