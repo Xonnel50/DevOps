@@ -18,8 +18,7 @@ pipeline {
             steps {
                 retry(3) {
                 sh 'docker --version'
-                sh 'sleep 30'
-                }
+              }
             }
         }
     
@@ -32,7 +31,13 @@ pipeline {
         }
         
         stage('Docker-Build') {
+            when {
+           expression {     
+                  return env.GIT_BRANCH == "origin/test"   
+                               }
+       }
             steps {
+                
                 sh "docker build -t ${Docker_Image_Name}:${env.BUILD_NUMBER} ."
                 sh "docker inspect ${Docker_Image_Name}:${env.BUILD_NUMBER}"
             }
