@@ -77,7 +77,7 @@ pipeline {
             sh 'docker ps'        
         }
         failure {
-            sh 'docker rm -f \$(sudo docker ps -a -q) 2> /dev/null || true'        
+            sh 'docker rm -f \$(docker ps -a -q) 2> /dev/null || true'        
         }
     }
 }
