@@ -5,7 +5,7 @@ pipeline {
         Docker_Tag = 'v2'
     }
     
-    
+    options { timestamps() }
     
     stages {
         stage('Pre-Checks') {
