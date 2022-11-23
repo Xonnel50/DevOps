@@ -72,9 +72,7 @@ pipeline {
     post {
         always {
             sh 'docker images'        
-        }
-    }
-    post {
+        }  
         aborted {
             sh 'docker ps'        
         }
