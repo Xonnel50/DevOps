@@ -47,6 +47,11 @@ pipeline {
                 sh 'docker images'
             }
         } 
+        stage('Docker-CleanUp') {
+            steps {
+                sh 'docker rm -f \$(sudo docker ps -a -q) 2> /dev/null || true'
+            }
+        } 
         
         stage('Docker-Deploy') {
             steps {
