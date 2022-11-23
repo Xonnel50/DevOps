@@ -4,15 +4,16 @@ pipeline {
         Docker_Image_Name = 'myimage'
         Docker_Tag = 'v2'
     }
-
+    
+    
+    
     stages {
+        stage('Pre-Checks') {
+        parallel {
         stage('Docker-Verify') {
             steps {
                 retry(3) {
                 sh 'docker --version'
-                }
-                timeout(time: 10, unit: 'SECONDS') {
-                    sh 'sleep 30'
                 }
             }
         }
@@ -21,6 +22,8 @@ pipeline {
             steps {
                 sh 'git --version'
             }
+        }
+        }
         }
         
         stage('Docker-Build') {
