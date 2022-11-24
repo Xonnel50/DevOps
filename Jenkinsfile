@@ -40,7 +40,7 @@ pipeline {
                 
                 sh "aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 467290638204.dkr.ecr.us-west-2.amazonaws.com"
                 sh "docker build -t my-jenkins-project ."
-                sh "docker tag my-jenkins-project:latest 467290638204.dkr.ecr.us-west-2.amazonaws.com/my-jenkins-project:latest"
+                sh "docker tag my-jenkins-project:latest 467290638204.dkr.ecr.us-west-2.amazonaws.com/my-jenkins-project:${env.BUILD_NUMBER}"
                 sh "docker push 467290638204.dkr.ecr.us-west-2.amazonaws.com/my-jenkins-project:latest"
             }
         } 
@@ -61,7 +61,7 @@ pipeline {
                 message "Do you want to proceed for deployment ?"
             }
             steps {
-                sh "docker run -itd -p 80:80 467290638204.dkr.ecr.us-west-2.amazonaws.com/my-jenkins-project:latest"
+                sh "docker run -itd -p 80:80 467290638204.dkr.ecr.us-west-2.amazonaws.com/my-jenkins-project:${env.BUILD_NUMBER}"
                 sh "docker ps"           
             }
         } 
