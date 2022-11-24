@@ -61,8 +61,8 @@ pipeline {
                 message "Do you want to proceed for deployment ?"
             }
             steps {
-                sh "docker run -itd  -p 80:80 ${Docker_Image_Name}:${env.BUILD_NUMBER}"
-                sh "docker ps"
+                sh "docker run -itd -p 80:80 467290638204.dkr.ecr.us-west-2.amazonaws.com/my-jenkins-project:latest"
+                sh "docker ps"           
             }
         } 
         
