@@ -55,7 +55,7 @@ pipeline {
             }
         } 
         
-        stage('Docker-Deploy') {
+        stage('Test-Env-Deploy') {
             input
             {
                 message "Do you want to proceed for deployment ?"
@@ -66,6 +66,10 @@ pipeline {
             }
         } 
         stage('Prod-CleanUp') {
+            input
+            {
+                message "Do you want to proceed for Cleanup ?"
+            }
             steps {
                 sshagent(['Prod']) {
                     sh "ssh -o StrictHostKeyChecking=no -l ec2-user 52.34.73.204 'sudo docker rm -f \$(docker ps -a -q) 2> /dev/null || true'"
@@ -76,7 +80,7 @@ pipeline {
         stage('Prod-Deploy') {
             input
             {
-                message "Do you want to proceed for deployment ?"
+                message "Do you want to proceed for Prod-deployment ?"
             }
             steps {
                 sshagent(['Prod']) {                                                              
