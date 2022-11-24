@@ -66,6 +66,18 @@ pipeline {
             }
         } 
         
+        stage('Prod-Deploy') {
+            steps {
+                sshagent(['Prod']) {
+                                                                              
+                sh "ssh -o StrictHostKeyChecking=no -l ec2-user 52.34.73.204 'aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 467290638204.dkr.ecr.us-west-2.amazonaws.com'"
+
+                sh "ssh -o StrictHostKeyChecking=no -l ec2-user 52.34.73.204 'docker run -itd -p 80:80 467290638204.dkr.ecr.us-west-2.amazonaws.com/my-jenkins-project:${env.BUILD_NUMBER}'"
+
+             }
+            }
+        } 
+        
     }
     post {
         always {
