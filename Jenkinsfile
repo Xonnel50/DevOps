@@ -65,6 +65,13 @@ pipeline {
                 sh "docker ps"           
             }
         } 
+        stage('Prod-CleanUp') {
+            steps {
+                sshagent(['Prod']) {
+                    sh "ssh -o StrictHostKeyChecking=no -l ec2-user 52.34.73.204 'sudo docker rm -f \$(docker ps -a -q) 2> /dev/null || true'"
+                }            
+            }
+        } 
         
         stage('Prod-Deploy') {
             input
