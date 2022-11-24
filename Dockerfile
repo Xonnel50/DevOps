@@ -1,2 +1,5 @@
 From httpd
-LABEL name="AutoPilot"
+
+LABEL name="devops"
+
+COPY index.html /usr/local/apache2/htdocs/
